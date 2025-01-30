@@ -26,7 +26,7 @@ jobs:
           python -m pip install --upgrade pip
           curl -sSL https://install.python-poetry.org | python3 -
 
-          cd isyflask-cli
+          cd isy-cli
           poetry install
           poetry build
           sudo apt-get install zip
@@ -50,10 +50,10 @@ jobs:
       - name: Install dependencies
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
-          cd isyflask-cli
+          cd isy-cli
           poetry install
       - name: Deploy Project
         run: |
-          cd isyflask-cli
+          cd isy-cli
           poetry config pypi-token.pypi ${{ secrets.PIPY_API_TOKEN }}
           poetry publish --build

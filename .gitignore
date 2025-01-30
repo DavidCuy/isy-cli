@@ -128,5 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-isyflask-cli/isyflask_cli/projects_config/*
-!isyflask-cli/isyflask_cli/projects_config/.gitkeep
+isy-cli/isy_cli/projects_config/*
+!isy-cli/isy_cli/projects_config/.gitkeep

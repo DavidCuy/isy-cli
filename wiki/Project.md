@@ -14,7 +14,7 @@ Este subcomando es utilizado para realizar tareas y afectaciones generales para 
 
 ```isy project init```
 
-Genera un nuevo proyecto con el cli de isyflask en la carpeta donde se haya ejecutado el comando. El promt nos hará una serie de preguntas para configurar nuestro proyecto relacionado con la base de datos de SQL a utilizar. Actualmente isy tiene soporte para las siguientes bases de datos:
+Genera un nuevo proyecto con el cli de isy en la carpeta donde se haya ejecutado el comando. El promt nos hará una serie de preguntas para configurar nuestro proyecto relacionado con la base de datos de SQL a utilizar. Actualmente isy tiene soporte para las siguientes bases de datos:
 
 * SQLite
 * MySQL
@@ -105,7 +105,7 @@ El encarpetado final será algo similar a lo que se muestra acontinuación, esto
 ├── Dockerfile
 ├── entrypoint.sh
 ├── Environment.py
-├── isyflask_project.toml
+├── isy_project.toml
 ├── README.md
 └── requirements.txt
 ```

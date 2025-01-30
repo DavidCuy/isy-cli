@@ -1,4 +1,4 @@
-# isyflask-cli
+# isy-cli
 
 Un cli para manejar proyectos de API con flask.
 
@@ -21,7 +21,7 @@ source ./venv/Scripts/activate
 Posteriormente instale el cli
 
 ````commandline
-pip install isyflask-cli
+pip install isy-cli
 ````
 
 Para iniciar un proyecto ejecute el siguiente comando y responda las preguntas que salgan en el prompt:
@@ -63,14 +63,14 @@ En esta herramienta, se mezcló el uso principal de estas librerías, por lo que
 
 ## Nota para los desarrolladores
 
-Para el desarrollo local con poetry, solo hay que agregar las siguientes líneas a tu archivo `isyflask_project.toml`:
+Para el desarrollo local con poetry, solo hay que agregar las siguientes líneas a tu archivo `isy_project.toml`:
 
 ```
 ...
 ...
 ...
 [tool.poetry.dependencies]
-isyflask = { path = "<relative_path_to_project>/isyflask_cli", develop = true }
+isy = { path = "<relative_path_to_project>/isy_cli", develop = true }
 ```
 
 ## Comandos

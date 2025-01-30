@@ -54,7 +54,7 @@ Arguments:
 - tablename: Nombre de la tabla. Default='same-model-name'
 ```
 
-Con este comando se creará el modelo para la definicion del proyecto, por lo que creará el servicio, el controlador y el ruteo correspondiente. Además de hacer el mapeo de las columnas para la base de datos a partir del archivo JSON con el nombre del modelo indicado que se encuentre en la ruta `templates/isyflask/json`
+Con este comando se creará el modelo para la definicion del proyecto, por lo que creará el servicio, el controlador y el ruteo correspondiente. Además de hacer el mapeo de las columnas para la base de datos a partir del archivo JSON con el nombre del modelo indicado que se encuentre en la ruta `templates/isy/json`
 
 Se realizan las mismas afectaciones que en el comando: `isy model new`
 
@@ -200,7 +200,7 @@ erDiagram
 
 ```isy model fromJson --name=animal```
 
-Json `templates/isyflask/json/Animal.json` de entrada:
+Json `templates/isy/json/Animal.json` de entrada:
 
 ```json
 {
