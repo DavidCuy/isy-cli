@@ -1,4 +1,4 @@
-# isyflask-cli
+# isy-cli
 
 Un cli para manejar proyectos de API con flask.
 
@@ -21,13 +21,13 @@ source ./venv/Scripts/activate
 Posteriormente instale el cli
 
 ````commandline
-pip install isyflask-cli
+pip install isy-cli
 ````
 
 Para iniciar un proyecto ejecute el siguiente comando y responda las preguntas que salgan en el prompt:
 
 ````commandline
-isyflask-cli project init
+isy-cli project init
 pip install -r requirements.txt
 ````
 
@@ -80,7 +80,7 @@ flask run --host=0.0.0.0
 
 ```isy project init```
 
-Como se mostró anteriormente este comando nos sirve para inicializar un proyecto con el cli de isyflask.
+Como se mostró anteriormente este comando nos sirve para inicializar un proyecto con el cli de isy.
 El promt nos hará una serie de preguntas para configurar nuestro proyecto relacionado con la base de datos de SQL a utilizar. Actualmente isy tiene soporte para las siguientes bases de datos:
 
 * SQLite
@@ -172,7 +172,7 @@ El encarpetado final será algo similar a lo que se muestra acontinuación, esto
 ├── Dockerfile
 ├── entrypoint.sh
 ├── Environment.py
-├── isyflask_project.toml
+├── isy_project.toml
 ├── README.md
 └── requirements.txt
 ```

@@ -23,4 +23,4 @@ def callback_version(version: bool = False):
     Imprime la versión del CLI.
     """
     if version:
-        typer.echo(f'version: {v("isyflask-cli")}')
+        typer.echo(f'version: {v("isy-cli")}')

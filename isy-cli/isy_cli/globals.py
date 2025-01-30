@@ -173,35 +173,35 @@ class Config(BaseConf):
         return Config(project, template)
 
 
-def load_config(path="isyflask_project.toml") -> Config:
+def load_config(path="isy_project.toml") -> Config:
     config_path = Path(path)
     if not config_path.exists():
         typer.echo("config file not found in the project.", color=typer.colors.YELLOW)
         load_dotenv(".env")
         app_name = os.getenv("app_name") or ""
-        config_path.write_text(f"""[isyflask.project.definition]
+        config_path.write_text(f"""[isy.project.definition]
 name = "{app_name}"
 description = ""
 
-[isyflask.template.files]
-model = "templates/isyflask/model.txt"
-service = "templates/isyflask/service.txt"
-controller = "templates/isyflask/controller.txt"
-endpoint = "templates/isyflask/routes.txt"
-serviceEndpointConf = "templates/isyflask/endpoints/service.txt"
-controllerEndpointConf = "templates/isyflask/endpoints/controller.txt"
-endpointConf = "templates/isyflask/endpoints/routes.txt"
+[isy.template.files]
+model = ".isy/templates/model.txt"
+service = ".isy/templates/service.txt"
+controller = ".isy/templates/controller.txt"
+endpoint = ".isy/templates/routes.txt"
+serviceEndpointConf = ".isy/templates/endpoints/service.txt"
+controllerEndpointConf = ".isy/templates/endpoints/controller.txt"
+endpointConf = ".isy/templates/endpoints/routes.txt"
 
-[isyflask.project.folders]
+[isy.project.folders]
 root = "api"
 models = "api/app/Data/Models"
 services = "api/app/Services"
 controllers = "api/app/Controllers"
 endpoints = "api/routes"
-jsons = "templates/isyflask/json"
+jsons = ".isy/templates/json"
         """)
         typer.echo(
             f"Created config file at {config_path} in this path you can find all configuration for the project here.")
         typer.echo(f"Please add the file {config_path} to git tracking and commit it")
     toml_config = toml.loads(config_path.read_text())
-    return Config.from_dict(toml_config["isyflask"])
+    return Config.from_dict(toml_config["isy"])

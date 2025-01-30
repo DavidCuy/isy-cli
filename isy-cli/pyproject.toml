@@ -1,18 +1,18 @@
 [tool.poetry]
-name = "isyflask-cli"
+name = "isy-cli"
 version = "0.6.0"
 description = "Un cli para manejar proyectos de API con flask"
 authors = ["David Cuy <david.cuy.sanchez@gmail.com>"]
 readme = "README.md"
-packages = [{include = "isyflask_cli"}]
-homepage = "https://github.com/DavidCuy/easyflask-cli"
-repository = "https://github.com/DavidCuy/easyflask-cli"
-documentation = "https://github.com/DavidCuy/easyflask-cli"
+packages = [{include = "isy_cli"}]
+homepage = "https://github.com/DavidCuy/isy-cli"
+repository = "https://github.com/DavidCuy/isy-cli"
+documentation = "https://github.com/DavidCuy/isy-cli"
 
 
 [tool.poetry.scripts]
-isyflask-cli = "isyflask_cli.cli:app"
-isy = "isyflask_cli.cli:app"
+isy-cli = "isy_cli.cli:app"
+isy = "isy_cli.cli:app"
 
 [tool.poetry.dependencies]
 python = "^3.9"

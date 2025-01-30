@@ -32,7 +32,7 @@ def new_from_json(
         tablename: str = typer.Option(help='Nombre de la tabla', default='same-model-name')
     ):
     """
-    Crea un nuevo modelo de acuerdo con el nombre especificado y el archivo en la ruta "./templates/isyflask/json"
+    Crea un nuevo modelo de acuerdo con el nombre especificado y el archivo en la ruta "./.isy/templates/json"
     """
     config = load_config()
     try:

@@ -1,5 +1,5 @@
 Metadata-Version: 1.1
-Name: isyflask-cli
+Name: isy-cli
 Version: 0.6.0
 Summary: Un cli para manejar proyectos de API con flask
 Author: David Cuy
@@ -19,7 +19,7 @@ Requires-Dist: typer[all] (>=0.5.0,<0.6.0)
 
 Description-Content-Type: text/markdown
 
-# isyflask-cli
+# isy-cli
 
 Un cli para manejar proyectos de API con flask.
 
@@ -42,13 +42,13 @@ source ./venv/Scripts/activate
 Posteriormente instale el cli
 
 ````commandline
-pip install isyflask-cli
+pip install isy-cli
 ````
 
 Para iniciar un proyecto ejecute el siguiente comando y responda las preguntas que salgan en el prompt:
 
 ````commandline
-isyflask-cli project init
+isy-cli project init
 pip install -r requirements.txt
 ````
 

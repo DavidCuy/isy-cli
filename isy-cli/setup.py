@@ -2,11 +2,11 @@
 from setuptools import setup
 
 packages = \
-['isyflask_cli',
- 'isyflask_cli.src',
- 'isyflask_cli.src.model',
- 'isyflask_cli.src.project',
- 'isyflask_cli.src.utils']
+['isy_cli',
+ 'isy_cli.src',
+ 'isy_cli.src.model',
+ 'isy_cli.src.project',
+ 'isy_cli.src.utils']
 
 package_data = \
 {'': ['*']}
@@ -21,10 +21,10 @@ install_requires = \
  'PyYAML==6.0.1']
 
 entry_points = \
-{'console_scripts': ['isy = isyflask_cli.cli:app']}
+{'console_scripts': ['isy = isy_cli.cli:app']}
 
 setup_kwargs = {
-    'name': 'isyflask-cli',
+    'name': 'isy-cli',
     'version': '0.6.0',
     'description': 'Un cli para manejar proyectos de API con flask.',
     'author': 'David Cuy',

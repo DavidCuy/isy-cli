@@ -1,20 +1,22 @@
-[isyflask.project.definition]
+[isy.project.definition]
 name = ""
 description = ""
 
-[isyflask.template.files]
-model = "templates/isyflask/model.txt"
-service = "templates/isyflask/service.txt"
-controller = "templates/isyflask/controller.txt"
-endpoint = "templates/isyflask/routes.txt"
-serviceEndpointConf = "templates/isyflask/endpoints/service.txt"
-controllerEndpointConf = "templates/isyflask/endpoints/controller.txt"
-endpointConf = "templates/isyflask/endpoints/routes.txt"
+[isy.template.files]
+model = ".isy/templates/model.txt"
+service = ".isy/templates/service.txt"
+controller = ".isy/templates/controller.txt"
+endpoint = ".isy/templates/routes.txt"
+serviceEndpointConf = ".isy/templates/endpoints/service.txt"
+controllerEndpointConf = ".isy/templates/endpoints/controller.txt"
+endpointConf = ".isy/templates/endpoints/routes.txt"
 
-[isyflask.project.folders]
+[isy.project.folders]
 root = "api"
 models = "api/app/Data/Models"
 services = "api/app/Services"
 controllers = "api/app/Controllers"
 endpoints = "api/routes"
-        
+
+[tool.poetry.dependencies]
+isy = { path = "isy-cli/isy_cli", develop = true }
