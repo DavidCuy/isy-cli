@@ -74,5 +74,5 @@ isy = { path = "<relative_path_to_project>/isy_cli", develop = true }
 ```
 
 ## Comandos
-Para más información de los comandos, revisa la [Wiki](https://github.com/DavidCuy/easyflask-cli/wiki/)
+Para más información de los comandos, revisa la [Wiki](https://github.com/DavidCuy/isy-cli/wiki/)
 

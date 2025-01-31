@@ -5,7 +5,7 @@ from cookiecutter.main import cookiecutter
 from pathlib import Path
 from ...globals import Constants, DRIVERS, SQL_PORTS_DEFAULT
 
-def generate_flask_template(project_name: str, db_dialect: str, db_host: str, db_user: str, db_pass: str, db_name: str, docker_db: bool = False, pattern_version = 'latest'):
+def generate_flask_template(project_name: str, db_dialect: str, db_host: str, db_user: str, db_pass: str, db_name: str, docker_db: bool = False, pattern_version = 'main'):
     """Descarga y configura el template de patron para flask
 
     Args:

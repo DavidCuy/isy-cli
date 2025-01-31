@@ -1,10 +1,10 @@
 Metadata-Version: 1.1
 Name: isy-cli
-Version: 0.6.0
+Version: 1.0.0
 Summary: Un cli para manejar proyectos de API con flask
 Author: David Cuy
 Author-email: david.cuy.sanchez@gmail.com
-Home-page: https://github.com/DavidCuy/easyflask-cli
+Home-page: https://github.com/DavidCuy/isy-cli
 Requires-Python: >=3.8,<4.0
 Classifier: Programming Language :: Python :: 3
 Classifier: Programming Language :: Python :: 3.7

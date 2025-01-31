@@ -25,13 +25,13 @@ entry_points = \
 
 setup_kwargs = {
     'name': 'isy-cli',
-    'version': '0.6.0',
-    'description': 'Un cli para manejar proyectos de API con flask.',
+    'version': '1.0.0',
+    'description': 'Un cli para manejar proyectos de API de python.',
     'author': 'David Cuy',
     'author_email': 'david.cuy.sanchez@gmail.com',
     'maintainer': None,
     'maintainer_email': None,
-    'url': 'https://github.com/DavidCuy/easyflask-cli',
+    'url': 'https://github.com/DavidCuy/isy-cli',
     'packages': packages,
     'package_data': package_data,
     'install_requires': install_requires,
