@@ -57,7 +57,7 @@ def init_project(
             Constants.POSTGRESQL_ENGINE.value
         ])
     db_config['db_engine'] = typer.prompt("Elija su motor de base de datos", "sqlite", show_choices=True, type=dbChoices)
-    db_config['db_driver'] = DRIVERS[f'{Constants.MYSQL_ENGINE}-{pattern_type.lower()}']
+    db_config['db_driver'] = DRIVERS[f'{Constants.MYSQL_ENGINE.value}-{pattern_type.lower()}']
 
     default_port = typer.confirm(f"¿Desea utilizar el port default de su driver [{SQL_PORTS_DEFAULT[Constants.MYSQL_ENGINE]}]?")
     db_config['db_port'] = SQL_PORTS_DEFAULT[Constants.MYSQL_ENGINE] if default_port else int(typer.prompt("Indique el número de su puerto de base de datos"))
