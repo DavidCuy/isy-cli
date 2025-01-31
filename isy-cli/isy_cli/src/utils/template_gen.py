@@ -5,32 +5,58 @@ from cookiecutter.main import cookiecutter
 from pathlib import Path
 from ...globals import Constants, DRIVERS, SQL_PORTS_DEFAULT
 
-def generate_flask_template(project_name: str, db_dialect: str, db_host: str, db_user: str, db_pass: str, db_name: str, docker_db: bool = False, pattern_version = 'main'):
+def generate_flask_template(project_name: str,
+                            db_engine: str,
+                            db_driver: str,
+                            db_host: str,
+                            db_port: int,
+                            db_user: str,
+                            db_pass: str,
+                            db_name: str,
+                            from_secret: bool = False,
+                            secret_arn: str = '',
+                            docker_db: bool = False,
+                            pattern_type: str = 'flask',
+                            pattern_version = 'main'):
     """Descarga y configura el template de patron para flask
 
     Args:
         project_name (str): Nombre del proyecto
-        db_dialect (str): Motor de base de datos
+        db_engine (str): Motor de base de datos
+        db_driver (str): Driver de base de datos
         db_host (str): Host de base de datos
+        db_port (int): Puerto de base de datos
         db_user (str): Usuario de base de datos
         db_pass (str): Contraseña de base de datos
         db_name (str): Nombre de base de datos
         docker_db (bool, optional): Crea la configuracion de docker para uso local. Defaults to False.
+        pattern_type (str, optional): Tipo de patron. Defaults to 'flask'.
         pattern_version (str, optional): Rama o tag de github a utilizar del template. Lates utiliza la rama main.
     """
     config_override = {
         "directory_name": project_name,
         "develop_branch": "main",
-        "dbDialect": db_dialect,
-        "db_host": db_host,
-        "db_user": db_user,
-        "db_pass": db_pass,
-        "db_name": db_name,
-        "_dbDriver": DRIVERS[db_dialect],
-        "_db_port": SQL_PORTS_DEFAULT[db_dialect],
-        "docker_local_db_enable": docker_db,
-        "_db_extra_params": "?driver=FreeTDS" if db_dialect == Constants.SQLSERVER_ENGINE.value else ""
     }
+    if not from_secret:
+        config_override.update({
+            "dbDialect": db_engine,
+            "db_host": db_host,
+            "db_user": db_user,
+            "db_pass": db_pass,
+            "db_name": db_name,
+            "_dbDriver": db_driver,
+            "_db_port": db_port
+        })
+        if pattern_type.lower() == 'flask':
+            config_override.update({
+                "docker_local_db_enable": docker_db,
+                "_db_extra_params": "?driver=FreeTDS" if db_engine == Constants.SQLSERVER_ENGINE.value else ""
+            })
+    else:
+        config_override.update({
+            "from_secret": from_secret,
+            "secret_arn": secret_arn
+        })
     cookiecutter_kwargs = {
         "directory": "code",
         "overwrite_if_exists": True,

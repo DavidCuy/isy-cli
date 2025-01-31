@@ -30,9 +30,13 @@ class Constants(Enum):
 DRIVERS = {
     Constants.SQLITE_ENGINE.value: "sqlite",
     Constants.SQLSERVER_ENGINE.value: "pyodbc",
-    Constants.MYSQL_ENGINE.value: "pymysql",
+    f'{Constants.MYSQL_ENGINE.value}-flask': "pymysql",
+    f'{Constants.MYSQL_ENGINE.value}-sam': "mysqldb",
     Constants.POSTGRESQL_ENGINE.value: "psycopg2"
 }
+
+def get_driver_from_engine(engine: Constants):
+    return DRIVERS.get(engine.value, None)
 
 SQL_PORTS_DEFAULT = {
     Constants.SQLITE_ENGINE.value: "",
