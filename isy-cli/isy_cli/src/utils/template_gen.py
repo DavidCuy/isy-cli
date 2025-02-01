@@ -14,7 +14,7 @@ def generate_flask_template(project_name: str,
                             db_pass: str,
                             db_name: str,
                             from_secret: bool = False,
-                            secret_arn: str = '',
+                            secret_name: str = '',
                             docker_db: bool = False,
                             pattern_type: str = 'flask',
                             pattern_version = 'main'):
@@ -36,15 +36,15 @@ def generate_flask_template(project_name: str,
     config_override = {
         "directory_name": project_name,
         "develop_branch": "main",
+        "dbDialect": db_engine,
+        "_dbDriver": db_driver,
     }
     if not from_secret:
         config_override.update({
-            "dbDialect": db_engine,
             "db_host": db_host,
             "db_user": db_user,
             "db_pass": db_pass,
             "db_name": db_name,
-            "_dbDriver": db_driver,
             "_db_port": db_port
         })
         if pattern_type.lower() == 'flask':
@@ -55,7 +55,7 @@ def generate_flask_template(project_name: str,
     else:
         config_override.update({
             "from_secret": from_secret,
-            "secret_arn": secret_arn
+            "secret_name": secret_name
         })
     cookiecutter_kwargs = {
         "directory": "code",
@@ -65,7 +65,9 @@ def generate_flask_template(project_name: str,
     }
     if pattern_version != 'latest':
         cookiecutter_kwargs.update({"checkout": pattern_version})
-    cookiecutter(Constants.FLASK_TEMPLATE.value, **cookiecutter_kwargs)
+    
+    template_url = Constants.FLASK_TEMPLATE.value if pattern_type.lower() == 'flask' else Constants.SAM_TEMPLATE.value
+    cookiecutter(template_url, **cookiecutter_kwargs)
 
 def add_code_to_module(template_path: Path, module_path: Path, modelName: str, code_format_override: dict):
     module_code = template_path.read_text().format(**code_format_override)

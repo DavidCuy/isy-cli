@@ -31,7 +31,7 @@ def init_project(
         "db_pass": None,
         "db_name": None,
         "from_secret": False,
-        "secret_arn": '',
+        "secret_name": '',
     }
     docker_db_enable = False
     project_name = typer.prompt("Nombre del proyecto")
@@ -42,13 +42,6 @@ def init_project(
             Constants.MYSQL_ENGINE.value,
             Constants.POSTGRESQL_ENGINE.value
         ])
-        db_config['from_secret'] = typer.confirm("¿Las credenciales de la base de datos se encuentra en AWS Secret Manager?")
-
-        if db_config['from_secret']:
-            db_config['secret_arn'] = typer.prompt("Escriba el arn del secreto. Revise la documentación para el formato correcto")
-        
-        generate_flask_template(project_name, **db_config, docker_db=docker_db_enable, pattern_type=pattern_type, pattern_version=pattern_version)
-        return
     else: 
         dbChoices = Choice([
             Constants.SQLITE_ENGINE.value,
@@ -56,33 +49,49 @@ def init_project(
             Constants.MYSQL_ENGINE.value,
             Constants.POSTGRESQL_ENGINE.value
         ])
-    db_config['db_engine'] = typer.prompt("Elija su motor de base de datos", "sqlite", show_choices=True, type=dbChoices)
+    db_config['db_engine'] = typer.prompt(
+        "Elija su motor de base de datos",
+        Constants.SQLITE_ENGINE.value if pattern_type.lower() == 'flask' else Constants.MYSQL_ENGINE.value,
+        show_choices=True,
+        type=dbChoices
+    )
     db_config['db_driver'] = DRIVERS[f'{Constants.MYSQL_ENGINE.value}-{pattern_type.lower()}']
 
-    default_port = typer.confirm(f"¿Desea utilizar el port default de su driver [{SQL_PORTS_DEFAULT[db_config['db_engine']]}]?")
-    db_config['db_port'] = SQL_PORTS_DEFAULT[db_config['db_engine']] if default_port else int(typer.prompt("Indique el número de su puerto de base de datos"))
-    
-    if db_config['db_engine'] != Constants.SQLITE_ENGINE.value:
-        
-        docker_db_enable = typer.confirm("¿Desea agregar configuracion de base de datos para desarrollo local en docker?") if pattern_type.lower() == 'flask' else False
-        if not docker_db_enable:
-            db_config['db_host'] = typer.prompt("Host de la base de datos")
-        else:
-            db_config['db_host'] = Constants.LOCALHOST_DB_DOCKER.value
-        db_config['db_name'] = typer.prompt("Nombre de la base de datos")
-        
-        if docker_db_enable and db_config['db_engine'] == Constants.SQLSERVER_ENGINE.value:
-            db_config['db_user'] = Constants.MSSQL_SA_USER.value
-        else:
-            db_config['db_user'] = typer.prompt("Usuario de la base de datos")
-                
-        autopassword = typer.confirm("¿Desea autogenerar la contraseña?") if docker_db_enable is True else False
-        if autopassword:
-            db_config['db_pass'] = get_random_string()
-        else:
-            db_config['db_pass'] = typer.prompt("Contraseña de la base de datos", hide_input=True)
+    skip_render = False
+    if pattern_type.lower() == 'sam':
+        db_config['from_secret'] = typer.confirm("¿Las credenciales de la base de datos se encuentra en AWS Secret Manager?")
 
-    generate_flask_template(project_name, **db_config, docker_db=docker_db_enable, pattern_type=pattern_type, pattern_version=pattern_version)
+        if db_config['from_secret']:
+            db_config['secret_name'] = typer.prompt("Escriba el nombre del secreto. Revise la documentación para el formato correcto")
+        
+        generate_flask_template(project_name, **db_config, docker_db=docker_db_enable, pattern_type=pattern_type, pattern_version=pattern_version)
+        skip_render = True
+    
+    if not skip_render:
+        default_port = typer.confirm(f"¿Desea utilizar el port default de su driver [{SQL_PORTS_DEFAULT[db_config['db_engine']]}]?")
+        db_config['db_port'] = SQL_PORTS_DEFAULT[db_config['db_engine']] if default_port else int(typer.prompt("Indique el número de su puerto de base de datos"))
+        
+        if db_config['db_engine'] != Constants.SQLITE_ENGINE.value:
+            
+            docker_db_enable = typer.confirm("¿Desea agregar configuracion de base de datos para desarrollo local en docker?") if pattern_type.lower() == 'flask' else False
+            if not docker_db_enable:
+                db_config['db_host'] = typer.prompt("Host de la base de datos")
+            else:
+                db_config['db_host'] = Constants.LOCALHOST_DB_DOCKER.value
+            db_config['db_name'] = typer.prompt("Nombre de la base de datos")
+            
+            if docker_db_enable and db_config['db_engine'] == Constants.SQLSERVER_ENGINE.value:
+                db_config['db_user'] = Constants.MSSQL_SA_USER.value
+            else:
+                db_config['db_user'] = typer.prompt("Usuario de la base de datos")
+                    
+            autopassword = typer.confirm("¿Desea autogenerar la contraseña?") if docker_db_enable is True else False
+            if autopassword:
+                db_config['db_pass'] = get_random_string()
+            else:
+                db_config['db_pass'] = typer.prompt("Contraseña de la base de datos", hide_input=True)
+
+        generate_flask_template(project_name, **db_config, docker_db=docker_db_enable, pattern_type=pattern_type, pattern_version=pattern_version)
 
     local_project_dir = Path(os.getcwd()).joinpath(project_name).joinpath('.isy')
     if not local_project_dir.exists():
@@ -93,6 +102,7 @@ def init_project(
             "project_name": project_name,
             "dbDialect": db_config['db_engine'],
             "docker_db_enable": docker_db_enable,
+            "pattern_type": pattern_type,
             "pattern_version": pattern_version
         }, f)
     

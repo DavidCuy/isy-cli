@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 
 class Constants(Enum):
     FLASK_TEMPLATE = "https://github.com/DavidCuy/flask-pattern"
+    SAM_TEMPLATE = "https://github.com/DavidCuy/sam-pattern"
     SQLITE_ENGINE = "sqlite"
     SQLSERVER_ENGINE = "mssql"
     MYSQL_ENGINE = "mysql"
